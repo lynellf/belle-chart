@@ -1,18 +1,18 @@
 {
-  "name": "rescript-project-template",
+  "name": "belle.js",
   "version": "0.0.1",
+  "reason": { "react-jsx": 3 },
   "sources": {
-    "dir" : "src",
-    "subdirs" : true
+    "dir": "src",
+    "subdirs": true
   },
   "package-specs": {
     "module": "commonjs",
-    "in-source": true
+    "in-source": false
   },
   "suffix": ".bs.js",
-  "bs-dependencies": [
-  ],
+  "bs-dependencies": ["@rescript/react"],
   "warnings": {
-    "error" : "+101"
-  },
+    "error": "+101"
+  }
 }

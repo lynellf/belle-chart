@@ -1,5 +1,5 @@
 {
-  "name": "rescript-project-template",
+  "name": "belle.js",
   "version": "0.0.1",
   "scripts": {
     "build": "rescript",
@@ -9,9 +9,12 @@
   "keywords": [
     "rescript"
   ],
-  "author": "",
+  "author": "Ezell Frazier",
   "license": "MIT",
   "dependencies": {
+    "@rescript/react": "^0.10.3",
+    "chart.js": "^3.5.1",
+    "react-chartjs-2": "^3.0.5",
     "rescript": "*"
   }
 }
