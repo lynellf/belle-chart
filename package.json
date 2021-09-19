@@ -4,7 +4,8 @@
   "scripts": {
     "build": "rescript",
     "clean": "rescript clean -with-deps",
-    "start": "rescript build -w"
+    "start": "rescript build -w",
+    "demo": "snowpack dev"
   },
   "keywords": [
     "rescript"
@@ -13,8 +14,16 @@
   "license": "MIT",
   "dependencies": {
     "@rescript/react": "^0.10.3",
-    "chart.js": "^3.5.1",
-    "react-chartjs-2": "^3.0.5",
+    "chart.js": "^2.9.1",
+    "react-chartjs-2": "^2.8.0",
     "rescript": "*"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.14.5",
+    "@snowpack/plugin-babel": "^2.1.7",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "snowpack": "^3.8.8"
   }
 }
