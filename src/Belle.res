@@ -42,6 +42,8 @@ module Main = {
       "yAxes": ({ "display": bool })
     }
   }
+
+  @react.component
   let default = (~datasets: array<dataSet>, ~options: chartOptions) => {
   let baseDatasets = [
     {
@@ -53,7 +55,7 @@ module Main = {
       "pointBackgroundColor": "rgba(0, 0, 0, 0)",
       "pointBorderColor": "rgba(0, 0, 0, 0)",
       "pointHoverRadius": 0,
-      "showLine": false
+      "showLine": true
     },
     {
       "type": "line",
@@ -75,7 +77,7 @@ module Main = {
       "pointBackgroundColor": "rgba(0, 0, 0, 0)",
       "pointBorderColor": "rgba(0, 0, 0, 0)",
       "pointHoverRadius": 0,
-      "showLine": false
+      "showLine": true
     }
   ]
 
@@ -84,8 +86,10 @@ module Main = {
     external make: (~data: 'a, ~options: chartOptions) => React.element = "Scatter"
   }
   
+  let mergedData = Belt.Array.concat(baseDatasets, datasets)
+
   let chartData = {
-    "datasets": Belt.Array.concat(baseDatasets, datasets)
+    "datasets": mergedData
   };
 
   let defaultOptions = {
