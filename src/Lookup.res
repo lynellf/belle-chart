@@ -1601,12 +1601,13 @@ let zTableY = [
 let random = (maximum: float) => (maximum *. Js.Math.random())
 
 let zTable = Belt.Array.mapWithIndex(zTableX, (index, x) => {
+  let y = zTableY[index]
   { "x": x, "y": zTableY[index] }
 })
 
 let getY = (x) => {
   // possibly doesn't exist
-  let point = Belt.Array.getBy(zTable, (point) => Js.Math.round(point["x"]) === Js.Math.round(x))
+  let point = Belt.Array.getBy(zTable, (point) => point["x"] === x)
 
   // leverage built in ternary operator
   random(Belt.Option.getWithDefault(point, { "x": x, "y": 0.0 })["y"])

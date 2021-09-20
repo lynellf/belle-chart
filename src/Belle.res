@@ -95,7 +95,7 @@ module Main = {
   
   let formattedData = Js.Obj.assign(data, { "data": formattedPoints })
   let mergedData = Belt.Array.concat(baseDatasets, [formattedData])
-  Js.log(formattedPoints)
+  
   let chartData = {
     "datasets": mergedData
   };
