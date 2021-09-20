@@ -1,7 +1,7 @@
 module Main = {
   type point = {
-    x: int,
-    y: float
+    "x": int,
+    "y": float
   }
 
   type dataSet = {
@@ -17,21 +17,21 @@ module Main = {
   }
 
   let belowAverageLine = [
-    { x: -3, y: 0.00135 },
-    { x: -2, y: 0.02275 },
-    { x: -1, y: 0.15866 }
+    { "x": -3, "y": 0.00135 },
+    { "x": -2, "y": 0.02275 },
+    { "x": -1, "y": 0.15866 }
   ]
 
   let averageLine = [
-    { x: -1, y: 0.15866 },
-    { x: 0, y: 0.5 },
-    { x: 1, y: 0.15866 }
+    { "x": -1, "y": 0.15866 },
+    { "x": 0, "y": 0.5 },
+    { "x": 1, "y": 0.15866 }
   ]
 
   let aboveAverageLine = [
-    { x: 1, y: 0.15866 },
-    { x: 2, y: 0.02275 },
-    { x: 3, y: 0.00135 }
+    { "x": 1, "y": 0.15866 },
+    { "x": 2, "y": 0.02275 },
+    { "x": 3, "y": 0.00135 }
   ]
 
   type chartOptions = {
@@ -44,7 +44,7 @@ module Main = {
   }
 
   @react.component
-  let default = (~datasets: array<dataSet>, ~options: chartOptions) => {
+  let default = (~data: dataSet, ~options: chartOptions) => {
   let baseDatasets = [
     {
       "type": "line",
@@ -86,8 +86,16 @@ module Main = {
     external make: (~data: 'a, ~options: chartOptions) => React.element = "Scatter"
   }
   
-  let mergedData = Belt.Array.concat(baseDatasets, datasets)
-
+  let rawPoints =  data["data"]
+  
+  let formattedPoints = Belt.Array.map(rawPoints, point => {
+    let x = Belt.Int.toFloat(point["x"])
+    { "x": x, "y": Lookup.getY(x) }
+  })
+  
+  let formattedData = Js.Obj.assign(data, { "data": formattedPoints })
+  let mergedData = Belt.Array.concat(baseDatasets, [formattedData])
+  
   let chartData = {
     "datasets": mergedData
   };
