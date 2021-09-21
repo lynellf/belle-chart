@@ -1,21 +1,36 @@
-# ReScript Project Template
+## Belle Chart
 
-The only official ReScript starter template.
+A standard normal curve chart for React
 
-## Installation
+![Standard Normal Curve Chart](/image.bmp)
 
-```sh
-npm install
+### Usage
+
+```jsx
+import BelleChart from 'belle-chart'
+
+function Main(props) {
+  return <BelleChart data={props.data} />
+}
 ```
 
-## Build
+### Props
 
-- Build: `npm run build`
-- Clean: `npm run clean`
-- Build & watch: `npm run start`
+```typescript
+type DataItem = {
+  value: number
+  label?: string
+}
 
-## Run
+// Data Prop
+type Data = Array<DataItem>
 
-```sh
-node src/Demo.bs.js
+// Optional props
+
+// Chart.js chart options (as of Chart.js version ~2.8)
+// https://www.chartjs.org/docs/latest/general/options.html
+type Options = ChartOptions
+
+// Do we want to scatter the points along the y axis?
+type xScatter = boolean
 ```
