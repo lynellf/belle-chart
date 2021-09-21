@@ -2,7 +2,7 @@
   "name": "belle-chart",
   "version": "0.2.1",
   "description": "A normal distribution chart. For React.",
-  "main": "lib/es6_global/Belle.bs.js",
+  "main": "lib/es6_global/src/Belle.bs.js",
   "keywords": [
     "statistics",
     "normal distribution",
