@@ -22,8 +22,12 @@ type DataItem = {
   label?: string
 }
 
-// Data Prop
-type Data = Array<DataItem>
+// Data Prop Should match Chart.js dataset settings (as of Chart.js version ~2.8)
+// The Data Array is the only exception
+// https://www.chartjs.org/docs/master/general/data-structures.html
+type Dataset = {
+  data: Array<DataItem>
+}
 
 // Optional props
 
