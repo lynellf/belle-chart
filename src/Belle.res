@@ -4,16 +4,30 @@ module Main = {
     "y": float
   }
 
+  type dataItem = {
+    "value": float,
+    "label": option<string>
+  }
+
   type dataSet = {
-    "type": string,
-    "data": array<point>,
-    "fill": bool,
-    "backgroundColor": string,
-    "borderColor": string,
-    "pointBackgroundColor": string,
-    "pointBorderColor": string,
-    "pointHoverRadius": int,
-    "showLine": bool
+    "type": option<string>,
+    "data": array<dataItem>,
+    "fill": option<bool>,
+    "backgroundColor": option<string>,
+    "borderColor": option<string>,
+    "pointBackgroundColor": option<string>,
+    "pointBorderColor": option<string>,
+    "pointHoverRadius": option<int>,
+    "showLine": option<bool>
+  }
+
+  type chartOptions = {
+    "legend": {
+        "display": bool
+    },
+    "scales": {
+      "yAxes": ({ "display": bool })
+    }
   }
 
   let belowAverageLine = [
@@ -34,17 +48,42 @@ module Main = {
     { "x": 3, "y": 0.00135 }
   ]
 
-  type chartOptions = {
+  let defaultOptions = {
     "legend": {
-        "display": bool
+        "display": false
     },
     "scales": {
-      "yAxes": ({ "display": bool })
+      "yAxes": ({ "display": false })
     }
   }
 
+  let getLabel = (tooltipItem, data) => {
+    let defaultPoint = { "label": "No Label, No value", "x": 0.0, "y": 0.0, "color": "black" }
+    let defaultSet = { "data": [] }
+    let index = tooltipItem["index"]
+    let allPoints = data["datasets"]
+    let datasets = Belt.Array.get(allPoints, 3)
+    let datapoints = Belt.Option.getWithDefault(datasets, defaultSet)["data"]
+    let point = Belt.Array.get(datapoints, index)
+    Belt.Option.getWithDefault(point, defaultPoint)["label"]
+  }
+
+  let formatDatapoints = (data, rawPoints, xScatter) => {
+    let scatter = Belt.Option.getWithDefault(xScatter, false)
+    let formattedPoints = Belt.Array.map(rawPoints, dataItem => {
+      let x = dataItem["value"]
+      let label = dataItem["label"]
+      { "x": x, "y": Lookup.getY(x, scatter), "label": label }
+    })
+    Js.Obj.assign(data, { "data": formattedPoints })
+  }
+
+  let getDefaultOptions = (chartOptions: option<chartOptions>) => {
+    Belt.Option.getWithDefault(chartOptions, defaultOptions)
+  }
+
   @react.component
-  let default = (~data: dataSet, ~options: chartOptions) => {
+  let default = (~data: dataSet, ~options: option<chartOptions>, ~xScatter: option<bool>) => {
   let baseDatasets = [
     {
       "type": "line",
@@ -81,35 +120,38 @@ module Main = {
     }
   ]
 
-  module Scatter = {
-    @react.component @module("react-chartjs-2")
-    external make: (~data: 'a, ~options: chartOptions) => React.element = "Scatter"
-  }
+  
   
   let rawPoints =  data["data"]
-  
-  let formattedPoints = Belt.Array.map(rawPoints, point => {
-    let x = Belt.Int.toFloat(point["x"])
-    { "x": x, "y": Lookup.getY(x) }
-  })
-  
-  let formattedData = Js.Obj.assign(data, { "data": formattedPoints })
+  let formattedData = formatDatapoints(data, rawPoints, xScatter)
   let mergedData = Belt.Array.concat(baseDatasets, [formattedData])
   
   let chartData = {
     "datasets": mergedData
   };
 
-  let defaultOptions = {
+  let standardOptions = {
     "legend": {
         "display": false
     },
     "scales": {
-      "yAxes": ({ "display": false })
+      "yAxes": ({ "display": false }, { "ticks": { "display": false }, "gridLines": { "display": false } })
+    },
+    "tooltips": {
+      "callbacks": {
+        "label": getLabel
+      }
     }
  }
 
- <Scatter data={chartData} options={Js.Obj.assign(defaultOptions, options)} />
+ let defaults = getDefaultOptions(options)
+ let mergedOptions = Js.Obj.assign(defaults, standardOptions)
+
+ module Scatter = {
+    @react.component @module("react-chartjs-2")
+    external make: (~data: 'a, ~options: chartOptions) => React.element = "Scatter"
+  }
+ <Scatter data={chartData} options={mergedOptions} />
   }
 }
 

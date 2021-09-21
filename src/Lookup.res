@@ -1605,10 +1605,13 @@ let zTable = Belt.Array.mapWithIndex(zTableX, (index, x) => {
   { "x": x, "y": zTableY[index] }
 })
 
-let getY = (x) => {
+let getY = (x, randomize) => {
+  let defaultPoint = { "x": x, "y": 0.0 }
   // possibly doesn't exist
   let point = Belt.Array.getBy(zTable, (point) => point["x"] === x)
-
+  let y = Belt.Option.getWithDefault(point, defaultPoint)["y"]
   // leverage built in ternary operator
-  random(Belt.Option.getWithDefault(point, { "x": x, "y": 0.0 })["y"])
+  let randomY = random(Belt.Option.getWithDefault(point, defaultPoint)["y"])
+
+  randomize ? randomY : y
 }

@@ -1,15 +1,25 @@
 {
-  "name": "belle.js",
-  "version": "0.0.1",
+  "name": "belle-chart",
+  "version": "0.1.0",
+  "description": "A normal distribution chart. For React.",
+  "main": "lib/es6_global/Belle.bs.js",
+  "keywords": [
+    "statistics",
+    "normal distribution",
+    "chart",
+    "react",
+    "belle"
+  ],
+  "homepage": "https://github.com/lynellf/belle-chart",
+  "bugs": {
+    "url": "https://github.com/lynellf/belle-chart/issues"
+  },
   "scripts": {
     "build": "rescript",
     "clean": "rescript clean -with-deps",
     "start": "rescript build -w",
     "demo": "snowpack dev"
   },
-  "keywords": [
-    "rescript"
-  ],
   "author": "Ezell Frazier",
   "license": "MIT",
   "dependencies": {
