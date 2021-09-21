@@ -1,6 +1,6 @@
 {
   "name": "belle-chart",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A normal distribution chart. For React.",
   "main": "lib/es6_global/src/Belle.bs.js",
   "keywords": [
