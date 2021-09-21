@@ -82,7 +82,7 @@ module Main = {
     Belt.Option.getWithDefault(chartOptions, defaultOptions)
   }
 
-  @react.component
+  @react.component @genType
   let default = (~data: dataSet, ~options: option<chartOptions>, ~xScatter: option<bool>) => {
   let baseDatasets = [
     {
