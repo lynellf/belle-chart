@@ -151,7 +151,6 @@ module Main = {
     @react.component @module("react-chartjs-2")
     external make: (~data: 'a, ~options: chartOptions) => React.element = "Scatter"
   }
-  Js.log(mergedOptions)
  <Scatter data={chartData} options={mergedOptions} />
   }
 }
