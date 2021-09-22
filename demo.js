@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Belle from './lib/es6_global/src/Belle.bs.js'
+import Belle from './lib/js/src/Belle.bs'
 
 function App() {
   const data = [
