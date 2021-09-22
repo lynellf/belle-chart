@@ -1602,7 +1602,7 @@ let random = (maximum: float) => (maximum *. Js.Math.random())
 
 let zTable = Belt.Array.mapWithIndex(zTableX, (index, x) => {
   let y = zTableY[index]
-  { "x": x, "y": zTableY[index] }
+  { "x": x, "y": y }
 })
 
 let getY = (x, randomize) => {
