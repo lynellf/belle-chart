@@ -1,8 +1,8 @@
 {
   "name": "belle-chart",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A normal distribution chart. For React.",
-  "main": "lib/es6_global/Belle.bs.js",
+  "main": "lib/js/Belle.bs.js",
   "keywords": [
     "statistics",
     "normal distribution",
@@ -25,15 +25,14 @@
   "dependencies": {
     "@rescript/react": "^0.10.3",
     "chart.js": "^2.9.1",
-    "mathjs": "^9.4.5",
     "random": "^3.0.6",
     "react-chartjs-2": "^2.8.0",
-    "rescript": "*"
+    "rescript": "*",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",
     "@snowpack/plugin-babel": "^2.1.7",
-    "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "snowpack": "^3.8.8"
